@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class invisivel : MonoBehaviour
 {
+    public float raio = 5f;
     public string invisivelTag = "invisivel";
     public KeyCode KeyCodeToPress = KeyCode.E;
     public float tempoinvisivel = 2f;
     public float tempoCooldown = 1f; // tempo de espera do E
 
-    private GameObject[] invisivelObjects;
     private bool podeApertar = true;
 
-    void Start()
+    private void Start()
     {
-        invisivelObjects = GameObject.FindGameObjectsWithTag(invisivelTag);
-
+        
+        GameObject[] invisivelObjects = GameObject.FindGameObjectsWithTag(invisivelTag);
         foreach (GameObject obj in invisivelObjects)
         {
             var spriteRenderer = obj.GetComponent<SpriteRenderer>();
@@ -27,32 +27,51 @@ public class invisivel : MonoBehaviour
     {
         if (podeApertar && Input.GetKeyDown(KeyCodeToPress))
         {
-            StartCoroutine(MostrarTemporariamente());
+            
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, raio);
+
+           
+            StartCoroutine(MostrarTemporariamente(colliders));
         }
     }
 
-    IEnumerator MostrarTemporariamente()
+    IEnumerator MostrarTemporariamente(Collider2D[] colliders)
     {
         podeApertar = false;
 
-        // Ativa
-        foreach (GameObject obj in invisivelObjects)
+        // Ativa só os que estão no raio e têm a tag "invisivel"
+        List<GameObject> revelados = new List<GameObject>();
+        foreach (Collider2D col in colliders)
         {
-            var renderer = obj.GetComponent<Renderer>();
-            if (renderer != null) renderer.enabled = true;
+            if (col.CompareTag(invisivelTag))
+            {
+                var renderer = col.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.enabled = true;
+                    revelados.Add(col.gameObject); 
+                }
+            }
         }
 
+       
         yield return new WaitForSeconds(tempoinvisivel);
 
-        // Desativa
-        foreach (GameObject obj in invisivelObjects)
+       
+        foreach (GameObject obj in revelados)
         {
             var renderer = obj.GetComponent<Renderer>();
             if (renderer != null) renderer.enabled = false;
         }
 
-        // espera cooldown antes de poder apertar de novo
+      
         yield return new WaitForSeconds(tempoCooldown);
         podeApertar = true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, raio);
     }
 }
