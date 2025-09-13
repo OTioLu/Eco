@@ -328,14 +328,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636643621}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6692de8cfac0e1143908a850f1471a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   raio: 5
-  tempoReveladoOBJ: 2
-  tempoAtivoNPC: 3
+  tempoReveladoOBJ: 3
+  tempoAtivoNPC: 2
 --- !u!1 &688254090
 GameObject:
   m_ObjectHideFlags: 0
