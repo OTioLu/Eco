@@ -4,15 +4,8 @@ public class Player : MonoBehaviour
 {
     public Animator animator;
     public float speed = 5f;
-    public Transform NPC;
-    public float interactRange = 1.2f;
 
-    DialogueSystem dialogueSystem;
 
-    private void Awake()
-    {
-        dialogueSystem = FindObjectOfType<DialogueSystem>();
-    }
 
     void Update()
     {
@@ -27,14 +20,6 @@ public class Player : MonoBehaviour
 
         transform.position = transform.position + movement * speed * Time.deltaTime;
 
-        if (NPC == null || dialogueSystem == null) return;
 
-        if (Vector2.Distance(transform.position, NPC.position) <= interactRange)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                dialogueSystem.Interact();
-            }
-        }
     }
 }

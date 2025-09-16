@@ -236,8 +236,6 @@ GameObject:
   - component: {fileID: 365493001}
   - component: {fileID: 365493000}
   - component: {fileID: 365493003}
-  - component: {fileID: 365493005}
-  - component: {fileID: 365493004}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -308,38 +306,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 636643621}
---- !u!114 &365493004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365492998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7bf07a2eea9d774085482f097b94380, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DalogueData: {fileID: 11400000, guid: d0db18601673ae84b8b6d888a18bda65, type: 2}
-  dialogueUI: {fileID: 104256920}
-  typeText: {fileID: 365493005}
-  nameText: {fileID: 2083575828}
-  currentIndex: 0
---- !u!114 &365493005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365492998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92084980005bd5747a35bed8a09527d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TypeDelay: 0.1
-  textObject: {fileID: 1888890509}
-  fullText: um texto ai
 --- !u!1 &440265799
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +671,8 @@ GameObject:
   - component: {fileID: 993522786}
   - component: {fileID: 993522785}
   - component: {fileID: 993522784}
+  - component: {fileID: 993522788}
+  - component: {fileID: 993522787}
   m_Layer: 0
   m_Name: "NPC_intera\xE7ao"
   m_TagString: Untagged
@@ -797,7 +765,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -824,6 +792,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993522787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993522783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9127832afa26d048984eff45475fdb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogoBox: {fileID: 104256920}
+  dialogoText: {fileID: 1888890509}
+  nomeText: {fileID: 2083575828}
+  dialogo:
+  - nome: NPC
+    texto: aaaaaaaaaaaaaaaaaaaaaa
+  - nome: personagem
+    texto: bbbbbbbbbbbbbbbbbbbbbbb
+  wordSpeed: 0.1
+  waitTime: 1
+--- !u!70 &993522788
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993522783}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &1217121886
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +904,7 @@ GameObject:
   - component: {fileID: 1658446809}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -919,8 +944,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1658446809}
   speed: 5
-  NPC: {fileID: 993522786}
-  interactRange: 1.2
 --- !u!212 &1658446811
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1197,7 +1220,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -643.37695, y: -46.988205, z: -701.2085, w: -36.144745}
+  m_margin: {x: -643.37695, y: -46.988205, z: -701.2085, w: -7.4375763}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
