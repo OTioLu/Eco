@@ -6,6 +6,9 @@ TagManager:
   tags:
   - invisivel
   - sino
+  - tile_ignorado
+  - Enemy
+  - Coletavel
   layers:
   - Default
   - TransparentFX

@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/fase1.unity
     guid: 70a387e46c8f92846b344f4256e013cc
+  - enabled: 1
+    path: Assets/Scenes/morto.unity
+    guid: d965ebe3d9822cb4687b1b1d90f04102
   m_configObjects: {}

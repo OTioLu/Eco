@@ -1,11 +1,17 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
     public Animator animator;
     public float speed = 5f;
-
-
+    public int vida = 1;              
+    public int danoDoInimigo = 1;     
+    private string inimigoTag = "Enemy"; 
+    public string Scene;
 
     void Update()
     {
@@ -19,7 +25,40 @@ public class Player : MonoBehaviour
         }
 
         transform.position = transform.position + movement * speed * Time.deltaTime;
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(inimigoTag))
+        {
+            TomarDano(danoDoInimigo);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(inimigoTag))
+        {
+            TomarDano(danoDoInimigo);
+        }
+    }
+
+    void TomarDano(int dano)
+    {
+        vida -= dano;
+      
+
+        if (vida <= 0)
+        {
+            Morrer();
+        }
+    }
+
+    void Morrer()
+    {
+        Debug.Log("O player morreu!");
+        SceneManager.LoadScene(Scene);
+        gameObject.SetActive(false);
 
     }
 }
